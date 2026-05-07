@@ -26,16 +26,29 @@ function AuthPage() {
     setBusy(true);
     try {
       if (mode === "signup") {
-        const { error: err } = await supabase.auth.signUp({
+        const { data, error: err } = await supabase.auth.signUp({
           email, password,
           options: { emailRedirectTo: `${window.location.origin}/chat` },
         });
         if (err) throw err;
-        navigate({ to: "/chat" });
+        if (data.user && data.user.identities?.length === 0) {
+          setError("This email is already registered. Try signing in instead.");
+        } else {
+          setError("Check your email for the confirmation link, then sign in.");
+        }
       } else {
         const { error: err } = await supabase.auth.signInWithPassword({ email, password });
-        if (err) throw err;
-        navigate({ to: "/chat" });
+        if (err) {
+          if (err.message.includes("Email not confirmed")) {
+            setError("Please verify your email before signing in. Check your inbox.");
+          } else if (err.message.includes("Invalid login credentials")) {
+            setError("Wrong email or password. Try again or create an account.");
+          } else {
+            setError(err.message);
+          }
+        } else {
+          navigate({ to: "/chat" });
+        }
       }
     } catch (err: any) {
       setError(err.message ?? "Authentication failed");
