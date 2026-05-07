@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth-context";
 import { lovable } from "@/integrations/lovable";
 import { Sparkles } from "lucide-react";
+import { Logo } from "@/components/Logo";
 
 export const Route = createFileRoute("/auth")({
   component: AuthPage,
@@ -60,11 +61,9 @@ function AuthPage() {
     <div className="min-h-screen flex items-center justify-center bg-[#0F1012] px-4">
       <div className="w-full max-w-md rounded-3xl border border-[#2A2B2F] bg-[#1F2023] p-8 shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
         <div className="flex items-center gap-2 mb-6">
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#1EAEDB] to-[#8B5CF6] flex items-center justify-center">
-            <Sparkles className="h-5 w-5 text-white" />
-          </div>
+          <Logo className="h-10 w-10" />
           <div>
-            <h1 className="text-xl font-semibold text-white">Aether AI</h1>
+            <h1 className="text-xl font-semibold text-white">Sonic AI</h1>
             <p className="text-xs text-gray-400">{mode === "signin" ? "Welcome back" : "Create your account"}</p>
           </div>
         </div>

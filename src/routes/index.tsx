@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, ArrowRight } from "lucide-react";
+import { Logo } from "@/components/Logo";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -10,10 +11,8 @@ function Index() {
     <div className="min-h-screen bg-[#0F1012] text-white flex flex-col">
       <header className="px-6 py-4 flex items-center justify-between border-b border-[#2A2B2F]">
         <div className="flex items-center gap-2">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-[#1EAEDB] to-[#8B5CF6] flex items-center justify-center">
-            <Sparkles className="h-5 w-5 text-white" />
-          </div>
-          <span className="font-semibold text-lg">Aether AI</span>
+          <Logo className="h-9 w-9" />
+          <span className="font-semibold text-lg">Sonic AI</span>
         </div>
         <Link to="/auth" className="text-sm text-gray-300 hover:text-white transition">Sign in</Link>
       </header>
