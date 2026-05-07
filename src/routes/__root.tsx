@@ -2,14 +2,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
-  createRootRouteWithContext,
+  createRootRoute,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
 import { AuthProvider } from "@/lib/auth-context";
+
+const queryClient = new QueryClient();
 
 function NotFoundComponent() {
   return (
@@ -68,54 +66,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Sonic AI" },
-      { name: "description", content: "Sonic AI — your intelligent companion for chat, search, and creativity." },
-      { name: "author", content: "Sonic AI" },
-      { property: "og:title", content: "Sonic AI" },
-      { property: "og:description", content: "Sonic AI — your intelligent companion for chat, search, and creativity." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Sonic AI" },
-      { name: "twitter:description", content: "Sonic AI — your intelligent companion for chat, search, and creativity." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3aa718f0-c42e-4df6-af41-173104e6d420/id-preview-ab659849--5ac34bfe-1fe2-4ca7-8c0e-66dabd2a6215.lovable.app-1778153507462.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3aa718f0-c42e-4df6-af41-173104e6d420/id-preview-ab659849--5ac34bfe-1fe2-4ca7-8c0e-66dabd2a6215.lovable.app-1778153507462.png" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
-  }),
-  shellComponent: RootShell,
+export const Route = createRootRoute({
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
 
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
-
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>

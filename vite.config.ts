@@ -1,4 +1,13 @@
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
+import tailwindcss from "@tailwindcss/vite";
 
-// Minimal config for a static Vercel deployment – no Cloudflare server entry.
-export default defineConfig({});
+export default defineConfig({
+  plugins: [react(), tsconfigPaths(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
+});
