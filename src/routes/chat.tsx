@@ -2,7 +2,8 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import React from "react";
 import { useAuth } from "@/lib/auth-context";
 import { PromptInputBox } from "@/components/ui/ai-prompt-box";
-import { Search, Plus, MessageSquare, LogOut, PanelLeftClose, PanelLeft, Sparkles, User as UserIcon } from "lucide-react";
+import { Search, Plus, MessageSquare, LogOut, PanelLeftClose, PanelLeft, Sparkles, User as UserIcon, Settings } from "lucide-react";
+import { Logo } from "@/components/Logo";
 
 export const Route = createFileRoute("/chat")({
   component: ChatPage,
@@ -16,7 +17,7 @@ function ChatPage() {
   const [collapsed, setCollapsed] = React.useState(false);
   const [search, setSearch] = React.useState("");
   const [chats, setChats] = React.useState<ChatItem[]>([
-    { id: "1", title: "Welcome to Aether" },
+    { id: "1", title: "Welcome to Sonic AI" },
   ]);
   const [activeId, setActiveId] = React.useState<string>("1");
   const [messages, setMessages] = React.useState<{ role: "user" | "ai"; content: string }[]>([]);
@@ -55,12 +56,10 @@ function ChatPage() {
       <aside className={`flex flex-col border-r border-[#2A2B2F] bg-[#1A1B1E] transition-all duration-300 ${collapsed ? "w-16" : "w-72"}`}>
         <div className="flex items-center justify-between p-3 border-b border-[#2A2B2F]">
           {!collapsed && (
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#1EAEDB] to-[#8B5CF6] flex items-center justify-center">
-                <Sparkles className="h-4 w-4 text-white" />
-              </div>
-              <span className="font-semibold">Aether</span>
-            </div>
+            <Link to="/" className="flex items-center gap-2">
+              <Logo className="h-8 w-8" />
+              <span className="font-semibold">Sonic AI</span>
+            </Link>
           )}
           <button onClick={() => setCollapsed(!collapsed)}
             className="p-2 rounded-lg hover:bg-[#2A2B2F] text-gray-400 hover:text-white transition">
@@ -95,7 +94,7 @@ function ChatPage() {
         </div>
 
         <div className="p-3 border-t border-[#2A2B2F]">
-          <div className={`flex items-center gap-2 px-2 py-2 rounded-xl bg-[#2A2B2F] ${collapsed ? "justify-center" : ""}`}>
+          <Link to="/settings" className={`flex items-center gap-2 px-2 py-2 rounded-xl bg-[#2A2B2F] hover:bg-[#33343A] transition ${collapsed ? "justify-center" : ""}`}>
             <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#F97316] flex items-center justify-center flex-shrink-0">
               <UserIcon className="h-4 w-4 text-white" />
             </div>
@@ -103,14 +102,17 @@ function ChatPage() {
               <>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-medium truncate">{user.email}</p>
-                  <p className="text-[10px] text-gray-500">Free plan</p>
+                  <p className="text-[10px] text-gray-500">View profile</p>
                 </div>
-                <button onClick={() => signOut()} className="p-2 rounded-lg hover:bg-[#3A3B3F] text-gray-400 hover:text-white transition" title="Sign out">
-                  <LogOut className="h-4 w-4" />
-                </button>
+                <Settings className="h-4 w-4 text-gray-400" />
               </>
             )}
-          </div>
+          </Link>
+          {!collapsed && (
+            <button onClick={() => signOut()} className="mt-2 w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs text-gray-400 hover:text-white hover:bg-[#2A2B2F] transition">
+              <LogOut className="h-3.5 w-3.5" /> Sign out
+            </button>
+          )}
         </div>
       </aside>
 
@@ -119,9 +121,7 @@ function ChatPage() {
         <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6">
           {messages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center">
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-[#1EAEDB] to-[#8B5CF6] flex items-center justify-center mb-4">
-                <Sparkles className="h-8 w-8 text-white" />
-              </div>
+              <Logo className="h-20 w-20 mb-4" />
               <h1 className="text-3xl font-semibold mb-2">How can I help today?</h1>
               <p className="text-gray-400">Ask anything, search the web, think deeply, or create on canvas.</p>
             </div>
@@ -140,7 +140,7 @@ function ChatPage() {
 
         <div className="p-4 md:p-6 max-w-3xl mx-auto w-full">
           <PromptInputBox onSend={handleSend} isLoading={isLoading} />
-          <p className="text-center text-xs text-gray-500 mt-2">Aether may produce inaccurate information.</p>
+          <p className="text-center text-xs text-gray-500 mt-2">Sonic AI may produce inaccurate information.</p>
         </div>
       </main>
     </div>
