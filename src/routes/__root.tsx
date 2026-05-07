@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Sonic AI" },
-      { name: "twitter:description", content: "Chat Companion Pro is a React component for rich text input and AI-assisted interactions." },
+      { name: "twitter:description", content: "Sonic AI — your intelligent companion for chat, search, and creativity." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3aa718f0-c42e-4df6-af41-173104e6d420/id-preview-ab659849--5ac34bfe-1fe2-4ca7-8c0e-66dabd2a6215.lovable.app-1778153507462.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3aa718f0-c42e-4df6-af41-173104e6d420/id-preview-ab659849--5ac34bfe-1fe2-4ca7-8c0e-66dabd2a6215.lovable.app-1778153507462.png" },
     ],
