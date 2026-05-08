@@ -40,14 +40,24 @@ function ChatPage() {
     setMessages([]);
   };
 
-  const handleSend = (msg: string) => {
+  const handleSend = async (msg: string) => {
     if (!msg.trim()) return;
     setMessages((m) => [...m, { role: "user", content: msg }]);
     setIsLoading(true);
-    setTimeout(() => {
-      setMessages((m) => [...m, { role: "ai", content: "This is a simulated response. Connect an AI backend to get real answers." }]);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Request failed");
+      setMessages((m) => [...m, { role: "ai", content: data.reply }]);
+    } catch (err: any) {
+      setMessages((m) => [...m, { role: "ai", content: `Error: ${err.message}` }]);
+    } finally {
       setIsLoading(false);
-    }, 800);
+    }
   };
 
   return (
