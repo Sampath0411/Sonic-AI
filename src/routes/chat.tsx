@@ -104,12 +104,12 @@ function ChatPage() {
     setMessages(next);
     setIsLoading(true);
 
-    await supabase.from("messages").insert({ chat_id: chatId, user_id: user.id, role: "user", content: msg });
+    await supabase.from("messages").insert({ chat_id: chatId!, user_id: user.id, role: "user", content: msg });
 
     // Update title from first user message
     if (messages.length === 0) {
       const title = msg.slice(0, 50);
-      await supabase.from("chats").update({ title }).eq("id", chatId);
+      await supabase.from("chats").update({ title }).eq("id", chatId!);
       setChats((cs) => cs.map((c) => (c.id === chatId ? { ...c, title } : c)));
     }
 
@@ -165,7 +165,7 @@ function ChatPage() {
 
       if (assistantText) {
         await supabase.from("messages").insert({
-          chat_id: chatId, user_id: user.id, role: "assistant", content: assistantText,
+          chat_id: chatId!, user_id: user.id, role: "assistant", content: assistantText,
         });
       }
     } catch (e: any) {
