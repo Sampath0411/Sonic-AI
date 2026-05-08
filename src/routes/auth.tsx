@@ -62,7 +62,7 @@ function AuthPage() {
     <div className="min-h-screen flex items-center justify-center bg-[#0F1012] px-4 py-10">
       <div className="w-full max-w-xl rounded-3xl border border-[#2A2B2F] bg-[#1F2023] p-10 sm:p-12 shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
         <div className="flex flex-col items-center text-center mb-8">
-          <Logo className="h-20 w-20 mb-4" />
+          <Logo className="h-20 w-20 mb-4" spin />
           <h1 className="text-3xl font-semibold text-white tracking-tight">Sonic AI</h1>
           <p className="text-sm text-gray-400 mt-2">
             {mode === "signin" ? "Welcome back, sign in to continue" : "Create your account to get started"}
