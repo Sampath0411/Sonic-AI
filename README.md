@@ -1,6 +1,14 @@
 # Sonic AI
 
-A modern AI-powered chat application with real-time responses, authentication, and a sleek UI.
+<div align="center">
+  <img src="src/assets/sonic-logo.png" alt="Sonic AI Logo" width="120" height="120" />
+  
+  <h2>A Modern AI-Powered Chat Platform</h2>
+  
+  <p>
+    Experience real-time AI conversations with Sonic AI - a sleek, responsive chat application powered by OpenAI's GPT models.
+  </p>
+</div>
 
 ## Features
 - **Real-time AI Chat** - Powered by OpenAI's GPT models via OpenRouter
